@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:select_dialog/select_dialog.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,6 +10,8 @@ const AccentColor = const Color(0xffffffff);
 const BackgroundColor = const Color(0xffe5e5e5);
 const TextColor = const Color(0xff363636);
 const TextColor2 = const Color(0xff4c4c4c);
+const _LightGrey = const Color(0xffcacaca);
+const _LightGrey2 = const Color(0xff575757);
 
 class MyApp extends StatelessWidget {
   @override
@@ -116,76 +119,105 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               Container(
-                width: MediaQuery.of(context).size.width,
-                height: 72,
-                color: TextColor2,
                 child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Container(
-                        width: MediaQuery.of(context).size.width / 2,
-                        height: 72,
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 2,
+                      height: 72,
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: PrimaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.zero,
+                          ),
+                        ),
+                        onPressed: () {},
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
                               Icons.save,
-                              color: AccentColor,
                               size: 20,
+                              color: AccentColor,
                             ),
                             Text(
                               'Save',
                               style: TextStyle(
-                                color: AccentColor,
                                 fontSize: 24,
+                                color: AccentColor,
                               ),
                             ),
                           ],
                         ),
                       ),
                     ),
-                    RaisedButton(
-                      onPressed: () {},
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.sync,
-                            color: AccentColor,
-                            size: 20,
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 2 - 144,
+                      height: 72,
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: _LightGrey,
+                          alignment: Alignment.center,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.zero,
                           ),
-                          Text(
-                            'Sync',
-                            style: TextStyle(
+                        ),
+                        onPressed: () {},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.sync,
+                              size: 20,
                               color: AccentColor,
-                              fontSize: 24,
                             ),
-                          ),
-                        ],
+                            Text(
+                              'Sync',
+                              style: TextStyle(
+                                fontSize: 24,
+                                color: AccentColor,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    RaisedButton(
-                      onPressed: () {},
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.navigate_before,
-                            color: AccentColor,
-                            size: 25,
+                    SizedBox(
+                      width: 72,
+                      height: 72,
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: _LightGrey2,
+                          alignment: Alignment.center,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.zero,
                           ),
-                        ],
+                        ),
+                        onPressed: () {},
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          size: 25,
+                          color: AccentColor,
+                        ),
                       ),
                     ),
-                    RaisedButton(
-                      onPressed: () {},
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.navigate_next,
-                            color: AccentColor,
-                            size: 25,
+                    SizedBox(
+                      width: 72,
+                      height: 72,
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: _LightGrey2,
+                          alignment: Alignment.center,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.zero,
                           ),
-                        ],
+                        ),
+                        onPressed: () {},
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          size: 25,
+                          color: AccentColor,
+                        ),
                       ),
                     ),
                   ],
