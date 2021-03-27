@@ -7,11 +7,13 @@ void main() {
 
 const PrimaryColor = const Color(0xff0d3985);
 const AccentColor = const Color(0xffffffff);
-const BackgroundColor = const Color(0xffe5e5e5);
+const BackgroundColor = const Color(0xfff9f9f9);
 const TextColor = const Color(0xff363636);
 const TextColor2 = const Color(0xff4c4c4c);
 const _LightGrey = const Color(0xffcacaca);
 const _LightGrey2 = const Color(0xff575757);
+const _LightGrey3 = const Color(0xffeeeeee);
+const BorderColor = const Color(0xffd4d4d4);
 
 class MyApp extends StatelessWidget {
   @override
@@ -51,28 +53,45 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: 72,
-                color: AccentColor,
                 padding: EdgeInsets.all(24),
-                child: Row(
-                  children: <Widget>[
-                    Icon(
-                      Icons.account_circle,
-                      color: PrimaryColor,
-                      size: 28,
+                decoration: BoxDecoration(
+                  color: AccentColor,
+                  border: Border(
+                    bottom: BorderSide(
+                      width: 1,
+                      color: BorderColor,
                     ),
-                    Text(
-                      'S20000722',
-                      style: TextStyle(
-                        color: TextColor,
-                        fontSize: 24,
+                  ),
+                ),
+                child: InkWell(
+                  onTap: () => {},
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.account_circle,
+                        color: PrimaryColor,
+                        size: 28,
                       ),
-                    ),
-                    Icon(
-                      Icons.search,
-                      color: PrimaryColor,
-                      size: 28,
-                    )
-                  ],
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text(
+                        'S000001',
+                        style: TextStyle(
+                          color: TextColor,
+                          fontSize: 24,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Icon(
+                        Icons.search,
+                        color: PrimaryColor,
+                        size: 28,
+                      )
+                    ],
+                  ),
                 ),
               ),
               Container(
@@ -100,7 +119,16 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Container(
                             width: 408,
                             height: 56,
-                            color: TextColor2,
+                            decoration: BoxDecoration(
+                              color: _LightGrey3,
+                              border: Border.all(
+                                width: 1,
+                                color: BorderColor,
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5),
+                              ),
+                            ),
                           ),
                         ),
                       ],
@@ -110,8 +138,17 @@ class _MyHomePageState extends State<MyHomePage> {
                         Container(
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height - 378,
-                          color: AccentColor,
                           padding: EdgeInsets.all(24),
+                          decoration: BoxDecoration(
+                            color: AccentColor,
+                            border: Border.all(
+                              width: 1,
+                              color: BorderColor,
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -131,7 +168,40 @@ class _MyHomePageState extends State<MyHomePage> {
                             borderRadius: BorderRadius.zero,
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () => showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              backgroundColor: AccentColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                  10.0,
+                                ),
+                              ),
+                              title: Column(
+                                children: <Widget>[
+                                  Text(
+                                    "Save 완료",
+                                    style: TextStyle(
+                                      color: TextColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              actions: <Widget>[
+                                TextButton(
+                                  child: Text(
+                                    "확인",
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -139,6 +209,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               Icons.save,
                               size: 20,
                               color: AccentColor,
+                            ),
+                            SizedBox(
+                              width: 12,
                             ),
                             Text(
                               'Save',
@@ -162,7 +235,40 @@ class _MyHomePageState extends State<MyHomePage> {
                             borderRadius: BorderRadius.zero,
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () => showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              backgroundColor: AccentColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                  10.0,
+                                ),
+                              ),
+                              title: Column(
+                                children: <Widget>[
+                                  Text(
+                                    "Sync 완료",
+                                    style: TextStyle(
+                                      color: TextColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              actions: <Widget>[
+                                TextButton(
+                                  child: Text(
+                                    "확인",
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -170,6 +276,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               Icons.sync,
                               size: 20,
                               color: AccentColor,
+                            ),
+                            SizedBox(
+                              width: 12,
                             ),
                             Text(
                               'Sync',
