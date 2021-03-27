@@ -10,10 +10,25 @@ const AccentColor = const Color(0xffffffff);
 const BackgroundColor = const Color(0xfff9f9f9);
 const TextColor = const Color(0xff363636);
 const TextColor2 = const Color(0xff4c4c4c);
+const TextColor3 = const Color(0xffacacac);
 const _LightGrey = const Color(0xffcacaca);
 const _LightGrey2 = const Color(0xff575757);
 const _LightGrey3 = const Color(0xffeeeeee);
 const BorderColor = const Color(0xffd4d4d4);
+const Items = [
+  'S000001',
+  'S000002',
+  'S000003',
+  'S000004',
+  'S000005',
+  'S000006',
+  'S000007',
+  'S000008',
+  'S000009',
+  'S000010',
+];
+String _novalue = "No Value";
+String subjectName = "S000001";
 
 class MyApp extends StatelessWidget {
   @override
@@ -64,7 +79,72 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 child: InkWell(
-                  onTap: () => {},
+                  onTap: () => SelectDialog.showModal(
+                    context,
+                    backgroundColor: AccentColor,
+                    searchBoxDecoration: InputDecoration(
+                      hintText: 'Subject Name',
+                      hintStyle: TextStyle(
+                        color: TextColor2,
+                        fontSize: 24,
+                      ),
+                      suffixIcon: Icon(
+                        Icons.search,
+                        color: TextColor2,
+                        size: 22,
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: BorderColor,
+                        ),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: BorderColor,
+                        ),
+                      ),
+                    ),
+                    constraints: BoxConstraints(
+                      maxWidth: 460,
+                      maxHeight: 560,
+                    ),
+                    titleStyle: TextStyle(
+                      color: TextColor,
+                      fontSize: 24,
+                    ),
+                    label: 'Search Subject',
+                    selectedValue: _novalue,
+                    items: Items,
+                    itemBuilder: (
+                      BuildContext context,
+                      item,
+                      bool isSelected,
+                    ) {
+                      return Container(
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.account_circle,
+                            color: PrimaryColor,
+                            size: 30,
+                          ),
+                          selected: isSelected,
+                          title: Text(
+                            item,
+                            style: TextStyle(
+                              color: TextColor,
+                              fontSize: 24,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                    onChange: (String selected) {
+                      setState(() {
+                        _novalue = selected;
+                        subjectName = selected;
+                      });
+                    },
+                  ),
                   child: Row(
                     children: <Widget>[
                       Icon(
@@ -76,7 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         width: 16,
                       ),
                       Text(
-                        'S000001',
+                        subjectName,
                         style: TextStyle(
                           color: TextColor,
                           fontSize: 24,
