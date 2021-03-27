@@ -29,6 +29,17 @@ const Items = [
 ];
 String _novalue = "No Value";
 String subjectName = "S000001";
+String currentTime = "2021-03-29 09:30";
+List<bool> radioBool = [
+  true,
+  false,
+  false,
+];
+List<bool> checkeBool = [
+  true,
+  false,
+  false,
+];
 
 class MyApp extends StatelessWidget {
   @override
@@ -227,6 +238,212 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                             borderRadius: BorderRadius.all(
                               Radius.circular(10),
+                            ),
+                          ),
+                          child: Container(
+                            padding: EdgeInsets.all(24),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Now',
+                                  style: TextStyle(
+                                    color: TextColor,
+                                    fontSize: 24,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 16,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      currentTime,
+                                      style: TextStyle(
+                                        color: TextColor2,
+                                        fontSize: 24,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 16,
+                                    ),
+                                    Icon(
+                                      Icons.schedule,
+                                      color: PrimaryColor,
+                                      size: 24,
+                                    ),
+                                    SizedBox(
+                                      width: 16,
+                                    ),
+                                    SizedBox(
+                                      width: 76,
+                                      height: 40,
+                                      child: TextButton(
+                                        style: TextButton.styleFrom(
+                                          backgroundColor: PrimaryColor,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(5),
+                                            ),
+                                          ),
+                                        ),
+                                        onPressed: () => {
+                                          print('Now BTN Clicked'),
+                                        },
+                                        child: Text(
+                                          'Now',
+                                          style: TextStyle(
+                                            color: AccentColor,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 60,
+                                ),
+                                Text(
+                                  'Radio',
+                                  style: TextStyle(
+                                    color: TextColor,
+                                    fontSize: 24,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 16,
+                                ),
+                                Column(
+                                  children: [
+                                    for (var i = 0; i < 3; i += 1)
+                                      Row(
+                                        children: [
+                                          Checkbox(
+                                            onChanged: (bool value) {
+                                              setState(() {
+                                                radioBool[i] = value;
+                                              });
+                                            },
+                                            value: radioBool[i],
+                                            activeColor: PrimaryColor,
+                                          ),
+                                          Text(
+                                            'Example ${i + 1}',
+                                            style: TextStyle(
+                                              color: TextColor2,
+                                              fontSize: 24,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 60,
+                                ),
+                                Text(
+                                  'Check',
+                                  style: TextStyle(
+                                    color: TextColor,
+                                    fontSize: 24,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 16,
+                                ),
+                                Column(
+                                  children: [
+                                    for (var i = 0; i < 3; i += 1)
+                                      Row(
+                                        children: [
+                                          Checkbox(
+                                            onChanged: (bool value) {
+                                              setState(() {
+                                                checkeBool[i] = value;
+                                              });
+                                            },
+                                            value: checkeBool[i],
+                                            activeColor: PrimaryColor,
+                                          ),
+                                          Text(
+                                            'Example ${i + 1}',
+                                            style: TextStyle(
+                                              color: TextColor2,
+                                              fontSize: 24,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 60,
+                                ),
+                                Text(
+                                  'Text Area',
+                                  style: TextStyle(
+                                    color: TextColor,
+                                    fontSize: 24,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 16,
+                                ),
+                                TextField(
+                                  decoration: InputDecoration(
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: BorderColor,
+                                      ),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: BorderColor,
+                                      ),
+                                    ),
+                                  ),
+                                  style: TextStyle(
+                                    color: TextColor2,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 60,
+                                ),
+                                Text(
+                                  'File Upload',
+                                  style: TextStyle(
+                                    color: TextColor,
+                                    fontSize: 24,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 16,
+                                ),
+                                TextField(
+                                  readOnly: true,
+                                  decoration: InputDecoration(
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: BorderColor,
+                                      ),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: BorderColor,
+                                      ),
+                                    ),
+                                    suffixIcon: Icon(
+                                      Icons.file_upload,
+                                      color: PrimaryColor,
+                                      size: 30,
+                                    ),
+                                  ),
+                                  style: TextStyle(
+                                    color: TextColor2,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
