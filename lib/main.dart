@@ -1,9 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:select_dialog/select_dialog.dart';
 import 'package:roundcheckbox/roundcheckbox.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,7 +32,7 @@ const subjectList = [
 ];
 String _novalue = "No Value";
 String subjectName = "S000001";
-String currentTime = "2021-03-29 09:30";
+String currentTime = "Get Current Time";
 List<bool> radioBool = [
   true,
   false,
@@ -47,6 +46,7 @@ List<bool> checkeBool = [
 final ImagePicker _picker = ImagePicker();
 PickedFile _image;
 var imageName = TextEditingController();
+DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm');
 
 class MyApp extends StatelessWidget {
   @override
@@ -76,6 +76,15 @@ class _MyHomePageState extends State<MyHomePage> {
     PickedFile image = await _picker.getImage(source: ImageSource.gallery);
     setState(() {
       _image = image;
+      _image == null
+          ? imageName.text = "No File Selected"
+          : imageName.text = _image.path.split('/').last;
+    });
+  }
+
+  void getCurrentTime() {
+    setState(() {
+      currentTime = formatter.format(DateTime.now());
     });
   }
 
@@ -225,16 +234,16 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Container(
                             width: 408,
                             height: 56,
-                            decoration: BoxDecoration(
-                              color: _LightGrey3,
-                              border: Border.all(
-                                width: 1,
-                                color: BorderColor,
-                              ),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(5),
-                              ),
-                            ),
+                            // decoration: BoxDecoration(
+                            //   color: _LightGrey3,
+                            //   border: Border.all(
+                            //     width: 1,
+                            //     color: BorderColor,
+                            //   ),
+                            //   borderRadius: BorderRadius.all(
+                            //     Radius.circular(5),
+                            //   ),
+                            // ),
                           ),
                         ),
                       ],
@@ -273,7 +282,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 Row(
                                   children: [
                                     Text(
-                                      currentTime,
+                                      '$currentTime',
                                       style: TextStyle(
                                         color: TextColor2,
                                         fontSize: 24,
@@ -302,9 +311,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             ),
                                           ),
                                         ),
-                                        onPressed: () => {
-                                          print('Now BTN Clicked'),
-                                        },
+                                        onPressed: () => {getCurrentTime()},
                                         child: Text(
                                           'Now',
                                           style: TextStyle(
@@ -480,10 +487,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                     suffixIcon: InkWell(
                                       onTap: () {
                                         _getImage();
-                                        _image == null
-                                            ? imageName.text = "No File"
-                                            : imageName.text =
-                                                _image.path.split('/').last;
                                       },
                                       child: Icon(
                                         Icons.file_upload,

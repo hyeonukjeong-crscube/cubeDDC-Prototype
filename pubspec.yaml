@@ -31,6 +31,7 @@ dependencies:
   select_dialog: ^2.0.0
   roundcheckbox: ^2.0.0-nullsafety.0
   image_picker: ^0.7.3
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
