@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:select_dialog/select_dialog.dart';
 import 'package:roundcheckbox/roundcheckbox.dart';
+import 'package:image_picker/image_picker.dart';
 
 void main() {
   runApp(MyApp());
@@ -41,6 +44,9 @@ List<bool> checkeBool = [
   false,
   false,
 ];
+final ImagePicker _picker = ImagePicker();
+PickedFile _image;
+var imageName = TextEditingController();
 
 class MyApp extends StatelessWidget {
   @override
@@ -66,6 +72,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Future _getImage() async {
+    PickedFile image = await _picker.getImage(source: ImageSource.gallery);
+    setState(() {
+      _image = image;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -452,6 +465,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                                 TextField(
                                   readOnly: true,
+                                  controller: imageName,
                                   decoration: InputDecoration(
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
@@ -463,10 +477,19 @@ class _MyHomePageState extends State<MyHomePage> {
                                         color: BorderColor,
                                       ),
                                     ),
-                                    suffixIcon: Icon(
-                                      Icons.file_upload,
-                                      color: PrimaryColor,
-                                      size: 30,
+                                    suffixIcon: InkWell(
+                                      onTap: () {
+                                        _getImage();
+                                        _image == null
+                                            ? imageName.text = "No File"
+                                            : imageName.text =
+                                                _image.path.split('/').last;
+                                      },
+                                      child: Icon(
+                                        Icons.file_upload,
+                                        color: PrimaryColor,
+                                        size: 30,
+                                      ),
                                     ),
                                   ),
                                   style: TextStyle(
@@ -509,7 +532,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               title: Column(
                                 children: <Widget>[
                                   Text(
-                                    "Save 완료",
+                                    "Saved",
                                     style: TextStyle(
                                       color: TextColor,
                                     ),
@@ -519,7 +542,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               actions: <Widget>[
                                 TextButton(
                                   child: Text(
-                                    "확인",
+                                    "OK",
                                   ),
                                   onPressed: () {
                                     Navigator.pop(context);
@@ -576,7 +599,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               title: Column(
                                 children: <Widget>[
                                   Text(
-                                    "Sync 완료",
+                                    "Synced",
                                     style: TextStyle(
                                       color: TextColor,
                                     ),
@@ -586,7 +609,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               actions: <Widget>[
                                 TextButton(
                                   child: Text(
-                                    "확인",
+                                    "OK",
                                   ),
                                   onPressed: () {
                                     Navigator.pop(context);
