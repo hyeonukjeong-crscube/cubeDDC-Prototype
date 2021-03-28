@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:select_dialog/select_dialog.dart';
+import 'package:roundcheckbox/roundcheckbox.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +16,7 @@ const _LightGrey = const Color(0xffcacaca);
 const _LightGrey2 = const Color(0xff575757);
 const _LightGrey3 = const Color(0xffeeeeee);
 const BorderColor = const Color(0xffd4d4d4);
-const Items = [
+const subjectList = [
   'S000001',
   'S000002',
   'S000003',
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         primaryColor: PrimaryColor,
         accentColor: AccentColor,
+        unselectedWidgetColor: PrimaryColor,
       ),
       title: 'cubeDDC',
       home: MyHomePage(title: 'cubeDDC'),
@@ -125,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     label: 'Search Subject',
                     selectedValue: _novalue,
-                    items: Items,
+                    items: subjectList,
                     itemBuilder: (
                       BuildContext context,
                       item,
@@ -319,21 +321,49 @@ class _MyHomePageState extends State<MyHomePage> {
                                     for (var i = 0; i < 3; i += 1)
                                       Row(
                                         children: [
-                                          Checkbox(
-                                            onChanged: (bool value) {
-                                              setState(() {
-                                                radioBool[i] = value;
-                                              });
-                                            },
-                                            value: radioBool[i],
-                                            activeColor: PrimaryColor,
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 8,
+                                              ),
+                                              RoundCheckBox(
+                                                onTap: (bool value) {
+                                                  setState(() {
+                                                    radioBool[i] = value;
+                                                  });
+                                                },
+                                                isChecked: radioBool[i],
+                                                size: 32,
+                                                borderColor: Colors.transparent,
+                                                checkedWidget: Icon(
+                                                  Icons.radio_button_checked,
+                                                  color: PrimaryColor,
+                                                  size: 28,
+                                                ),
+                                                uncheckedWidget: Icon(
+                                                  Icons.radio_button_unchecked,
+                                                  color: PrimaryColor,
+                                                  size: 28,
+                                                ),
+                                                checkedColor:
+                                                    Colors.transparent,
+                                                uncheckedColor:
+                                                    Colors.transparent,
+                                              ),
+                                              SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                'Example ${i + 1}',
+                                                style: TextStyle(
+                                                  color: TextColor2,
+                                                  fontSize: 24,
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                          Text(
-                                            'Example ${i + 1}',
-                                            style: TextStyle(
-                                              color: TextColor2,
-                                              fontSize: 24,
-                                            ),
+                                          SizedBox(
+                                            height: 48,
                                           ),
                                         ],
                                       ),
